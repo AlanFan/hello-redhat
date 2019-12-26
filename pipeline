@@ -28,7 +28,7 @@ pipeline {
         script {
           openshift.withCluster() {
             openshift.withProject('test') {
-              openshift.selector("build", "hello-redhat").startBuild("--from-file=./app.jar", "--wait=true")
+              openshift.selector("bc", "hello-redhat").startBuild("--from-file=./app.jar", "--wait=true")
               openshift.tag("hello-redhat:latest", "hello-redhat:${TAG_SELECTOR}")
             }
           }
