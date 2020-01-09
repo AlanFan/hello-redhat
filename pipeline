@@ -10,13 +10,6 @@ pipeline {
         }
       }
     }
-    stage('Code Analysis') {
-       steps {
-          script {
-            sh 'mvn sonar:sonar -s settings.xml -Dsonar.projectKey=hello-redhat -Dsonar.host.url=http://sonarqube-default.apps.pfan.com -Dsonar.login=41d465025e7c0922c7f25835ff0f40154fe7a7b8'
-          }
-       }
-     }
     stage("Build JAR") {
       steps {
         sh 'mvn clean package -s settings.xml'
