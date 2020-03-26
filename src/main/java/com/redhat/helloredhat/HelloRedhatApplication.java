@@ -27,9 +27,14 @@ public class HelloRedhatApplication {
     @Value("${openshift.api}")
     String api;
 
-    @GetMapping
+    @GetMapping("/good")
     public String hello() {
         return "Hello RedHat";
+    }
+    
+    @GetMapping("/good/job")
+    public String hello() {
+        return "yes, good job.";
     }
 
     @PostMapping("/login")
