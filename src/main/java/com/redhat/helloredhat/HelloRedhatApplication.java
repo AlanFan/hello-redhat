@@ -33,7 +33,7 @@ public class HelloRedhatApplication {
     }
     
     @GetMapping("/good/job")
-    public String hello() {
+    public String hello2() {
         return "yes, good job.";
     }
 
