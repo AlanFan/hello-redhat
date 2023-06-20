@@ -117,7 +117,7 @@ spec:
       value: "{{ repo_url }}"
     - name: revision
       value: "{{ revision }}"
-  resources: []
+  
   workspaces:
     - name: source
       volumeClaimTemplate:
@@ -132,48 +132,52 @@ spec:
     - name: basic-auth
       secret:
         secretName: "{{ git_auth_secret }}"
-  tasks:
-    - name: git-clone
-      taskRef:
-        kind: ClusterTask
-        name: git-clone
-      params:
-        - name: url
-          value: $(params.repo_url)
-        - name: revision
-          value: $(params.revision)
-        - name: refspec
-          value: ''
-        - name: submodules
-          value: 'true'
-        - name: depth
-          value: '1'
-        - name: sslVerify
-          value: 'true'
-        - name: crtFileName
-          value: ca-bundle.crt
-        - name: subdirectory
-          value: ''
-        - name: sparseCheckoutDirectories
-          value: ''
-        - name: deleteExisting
-          value: 'true'
-        - name: httpProxy
-          value: ''
-        - name: httpsProxy
-          value: ''
-        - name: noProxy
-          value: ''
-        - name: verbose
-          value: 'true'
-        - name: gitInitImage
-          value: >-
-            registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:429ba9c10dfcff4ee0154ab75f9bd06fd306f019c0ed0b062ba7c03e56e3e33b
-        - name: userHome
-          value: /home/git
-      workspaces:
-          - name: output
-            workspace: source
-          - name: basic-auth
-            workspace: basic-auth
-  finally: []
+  pipelineSpec:
+    workspaces:
+      - name: source
+      - name: basic-auth
+    tasks:
+      - name: git-clone
+        taskRef:
+          kind: ClusterTask
+          name: git-clone
+        params:
+          - name: url
+            value: $(params.repo_url)
+          - name: revision
+            value: $(params.revision)
+          - name: refspec
+            value: ''
+          - name: submodules
+            value: 'true'
+          - name: depth
+            value: '1'
+          - name: sslVerify
+            value: 'true'
+          - name: crtFileName
+            value: ca-bundle.crt
+          - name: subdirectory
+            value: ''
+          - name: sparseCheckoutDirectories
+            value: ''
+          - name: deleteExisting
+            value: 'true'
+          - name: httpProxy
+            value: ''
+          - name: httpsProxy
+            value: ''
+          - name: noProxy
+            value: ''
+          - name: verbose
+            value: 'true'
+          - name: gitInitImage
+            value: >-
+              registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:429ba9c10dfcff4ee0154ab75f9bd06fd306f019c0ed0b062ba7c03e56e3e33b
+          - name: userHome
+            value: /home/git
+        workspaces:
+            - name: output
+              workspace: source
+            - name: basic-auth
+              workspace: basic-auth
+    finally: []
