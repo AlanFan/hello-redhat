@@ -13,7 +13,7 @@ metadata:
 components:
   - name: tools
     container:
-      image: registry.access.redhat.com/ubi9/openjdk-17:1.17-1
+      image: registry.access.redhat.com/ubi8/ubi:8.9-1028
       command: ["tail", "-f", "/dev/null"]
       memoryLimit: 512Mi
       mountSources: true
