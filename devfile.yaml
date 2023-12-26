@@ -13,7 +13,7 @@ metadata:
 components:
   - name: tools
     container:
-      image: registry.redhat.io/devspaces/udi-rhel8
+      image: quay.pfan.io/devspaces/udi-rhel8
       command: ["tail", "-f", "/dev/null"]
       memoryLimit: 512Mi
       mountSources: true
